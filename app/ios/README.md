@@ -18,7 +18,7 @@ open ios/Runner.xcworkspace
 
 第一次要在 Xcode 里给 `Runner` 和 `ShareExtension` 两个 target 都选上 Team（Signing & Capabilities）。两个 target 都用 App Group，开了自动签名时 Xcode 会自己注册。
 
-免费 Apple 账号（Personal Team）可以先用：每次签名 7 天有效，最多 3 台设备，不能用推送。它能不能注册 App Group 还没实测；不能的话，先在 Xcode 里去掉 `ShareExtension` target 和两份 `.entitlements`，只是少了分享入口。
+免费 Apple 账号（Personal Team）可以先用：每次签名 7 天有效，最多 3 台设备，不能用推送。它能不能注册 App Group 还没实测；不能的话，先在 Xcode 里去掉 `ShareExtension` target 和两份 `.entitlements`，只是少了分享入口。没有 Mac、要从 GitHub Actions 拿未签名包再在 Windows 上侧载时，按 [自用侧载](../../docs/ios-sideload.md) 做；同一件事也可以跑 `python tooling/ios/strip-share-extension.py`（不改默认工程，跑完再提交）。
 
 Bundle ID 如果被占用，要一起改三处：两个 target 的 `PRODUCT_BUNDLE_IDENTIFIER`，两份 `.entitlements` 里的 App Group，`ShareExtension/ShareInbox.swift` 的 `group`。扩展的 ID 必须以主应用的 ID 开头。
 
